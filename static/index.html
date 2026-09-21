@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Application Layer Protocol Visualizer</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <div>
+    <h1>Application Layer Protocol Visualizer</h1>
+    <p>Dual-panel simulation of DNS, HTTP and SMTP protocol exchanges</p>
+  </div>
+  <div class="badge">Computer Networks</div>
+</header>
+
+<main class="dashboard">
+  <section class="panel activity-panel">
+    <div class="panel-title">
+      <h2>Activity Panel</h2>
+      <span id="modeLabel">Browsing</span>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" data-mode="browse">🌐 Browsing</button>
+      <button class="tab" data-mode="mail">✉️ Mail</button>
+      <button class="tab" data-mode="stream">▶ Streaming</button>
+    </div>
+
+    <div id="browseForm" class="mode-form">
+      <label>URL</label>
+      <div class="input-row">
+        <input id="urlInput" value="https://example.com" placeholder="https://example.com">
+        <button id="visitBtn" class="primary">Visit</button>
+      </div>
+      <p class="hint">Simulated browser request. No real network request is made.</p>
+    </div>
+
+    <div id="mailForm" class="mode-form hidden">
+      <label>To</label>
+      <input id="toInput" value="student@example.com" placeholder="recipient@example.com">
+      <label>Subject</label>
+      <input id="subjectInput" value="Computer Networks Assignment" placeholder="Subject">
+      <label>Body</label>
+      <textarea id="bodyInput" rows="5">Hello, this is a simulated SMTP message.</textarea>
+      <button id="sendBtn" class="primary full">Send Mail</button>
+    </div>
+
+    <div id="streamForm" class="mode-form hidden">
+      <label>Video Quality</label>
+      <select id="qualityInput">
+        <option>360p</option>
+        <option selected>720p</option>
+        <option>1080p</option>
+      </select>
+      <div class="stream-controls">
+        <button id="playBtn" class="primary">▶ Play</button>
+        <button id="pauseBtn" class="secondary">Ⅱ Pause</button>
+      </div>
+      <div class="video-box">
+        <div class="play-circle">▶</div>
+        <strong id="streamStatus">Ready to stream</strong>
+        <small id="qualityStatus">Quality: 720p</small>
+      </div>
+    </div>
+
+    <div class="status-box">
+      <div class="status-head">
+        <strong>Status</strong>
+        <span id="statusDot" class="dot"></span>
+      </div>
+      <div id="statusText">Choose an activity to begin.</div>
+    </div>
+
+    <div class="log-box">
+      <div class="log-head">
+        <strong>Activity Log</strong>
+        <button id="clearLog">Clear</button>
+      </div>
+      <div id="activityLog" class="log-list">
+        <div class="empty">No activity yet.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel protocol-panel">
+    <div class="panel-title">
+      <h2>Protocol Visualization</h2>
+      <span id="protocolLabel">Waiting</span>
+    </div>
+
+    <div class="protocol-top">
+      <div class="legend">
+        <span><i class="client-key"></i> Client → Server</span>
+        <span><i class="server-key"></i> Server → Client</span>
+      </div>
+      <div class="controls">
+        <button id="prevBtn">← Previous</button>
+        <button id="pauseVizBtn">Ⅱ Pause</button>
+        <button id="nextBtn">Next →</button>
+        <button id="replayBtn">↻ Replay</button>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div id="progressBar"></div>
+    </div>
+    <div class="step-info">
+      <span id="stepCounter">Step 0 / 0</span>
+      <span id="timing">Waiting for activity</span>
+    </div>
+
+    <div id="visualizer" class="visualizer">
+      <div class="welcome">
+        <div class="network-icon">⇄</div>
+        <h3>Protocol visualization will appear here</h3>
+        <p>Perform Browsing, Mail, or Streaming in the left panel.</p>
+      </div>
+    </div>
+
+    <div id="messageCard" class="message-card hidden">
+      <div class="message-title">
+        <span id="messageDirection"></span>
+        <strong id="messageName"></strong>
+      </div>
+      <pre id="messageContent"></pre>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>Simulation only • Protocol behavior follows the assignment's DNS / HTTP / SMTP flow</span>
+  <span>AI-assisted development project</span>
+</footer>
+<script src="/static/app.js"></script>
+</body>
+</html>
